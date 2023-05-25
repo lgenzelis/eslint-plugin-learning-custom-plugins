@@ -1,0 +1,12 @@
+{
+  "name": "@lgenzelis/eslint-plugin-learning-custom-plugins",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "peerDependencies": {
+    "eslint": "8.41.0"
+  },
+  "devDependencies": {
+    "prettier": "2.8.8"
+  }
+}
