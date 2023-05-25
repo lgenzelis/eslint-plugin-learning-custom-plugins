@@ -1,9 +1,9 @@
-const { RuleTester } = require("eslint");
-const noUntranslatedText = require("./no-untranslated-text");
+const { RuleTester } = require('eslint');
+const noUntranslatedText = require('./no-untranslated-text');
 
 const ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: "latest",
+    ecmaVersion: 'latest',
     ecmaFeatures: {
       jsx: true,
       modules: true,
@@ -11,7 +11,7 @@ const ruleTester = new RuleTester({
   },
 });
 
-ruleTester.run("no-untranslated-text", noUntranslatedText, {
+ruleTester.run('no-untranslated-text', noUntranslatedText, {
   valid: [
     {
       code: "console.log('asdf')",
@@ -40,7 +40,7 @@ ruleTester.run("no-untranslated-text", noUntranslatedText, {
       code: `<TestComponent>42</TestComponent>;`,
     },
     {
-      code: "<TestComponent aria-label={t`some aria label`}>{t`lalala`}</TestComponent>;",
+      code: '<TestComponent aria-label={t`some aria label`}>{t`lalala`}</TestComponent>;',
     },
   ],
   invalid: [
@@ -48,13 +48,13 @@ ruleTester.run("no-untranslated-text", noUntranslatedText, {
       code: `function TestComponent() {
         return <div style="color: red">some text</div>;
       }`,
-      errors: [{ messageId: "untranslatedTextChild" }],
+      errors: [{ messageId: 'untranslatedTextChild' }],
     },
     {
       code: `function TestComponent() {
         return <div style="color: red" aria-label="some label" />;
       }`,
-      errors: [{ messageId: "untranslatedAriaLabel" }],
+      errors: [{ messageId: 'untranslatedAriaLabel' }],
     },
     {
       code: `function TestComponent() {
@@ -62,15 +62,15 @@ ruleTester.run("no-untranslated-text", noUntranslatedText, {
             <span>lalala</span>
           </div>;
       }`,
-      errors: [{ messageId: "untranslatedAriaLabel" }, { messageId: "untranslatedTextChild" }],
+      errors: [{ messageId: 'untranslatedAriaLabel' }, { messageId: 'untranslatedTextChild' }],
     },
     {
       code: `<TestComponent>lalala</TestComponent>;`,
-      errors: [{ messageId: "untranslatedTextChild" }],
+      errors: [{ messageId: 'untranslatedTextChild' }],
     },
     {
       code: '<TestComponent aria-label="some aria label">{t`lalala`}</TestComponent>;',
-      errors: [{ messageId: "untranslatedAriaLabel" }],
+      errors: [{ messageId: 'untranslatedAriaLabel' }],
     },
   ],
 });

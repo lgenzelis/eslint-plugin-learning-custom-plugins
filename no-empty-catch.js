@@ -1,8 +1,8 @@
 module.exports = {
   meta: {
     messages: {
-      emptyCatch: "Empty catch block is not allowed.",
-      noBlockStatement: "WHAT? No block statement? Are you kidding me?",
+      emptyCatch: 'Empty catch block is not allowed.',
+      noBlockStatement: 'WHAT? No block statement? Are you kidding me?',
     },
   },
   create(context) {
@@ -11,8 +11,8 @@ module.exports = {
     return {
       CatchClause(node) {
         const catchBlock = node.body;
-        if (catchBlock.type !== "BlockStatement") {
-          context.report({ node: catchBlock, messageId: "noBlockStatement" });
+        if (catchBlock.type !== 'BlockStatement') {
+          context.report({ node: catchBlock, messageId: 'noBlockStatement' });
           return;
         }
         if (catchBlock.body.length !== 0) {
@@ -27,7 +27,7 @@ module.exports = {
           return;
         }
 
-        context.report({ node: node.body, messageId: "emptyCatch" });
+        context.report({ node: node.body, messageId: 'emptyCatch' });
       },
     };
   },

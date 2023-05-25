@@ -1,9 +1,9 @@
-const { RuleTester } = require("eslint");
-const noEmptyCatchRule = require("./no-empty-catch.js");
+const { RuleTester } = require('eslint');
+const noEmptyCatchRule = require('./no-empty-catch.js');
 
 const ruleTester = new RuleTester();
 
-ruleTester.run("no-empty-catch", noEmptyCatchRule, {
+ruleTester.run('no-empty-catch', noEmptyCatchRule, {
   valid: [
     {
       code: `try { foo() } catch (e) { bar() }`,
@@ -18,7 +18,7 @@ ruleTester.run("no-empty-catch", noEmptyCatchRule, {
   invalid: [
     {
       code: `try { foo() } catch (e) {}`,
-      errors: [{ messageId: "emptyCatch" }],
+      errors: [{ messageId: 'emptyCatch' }],
     },
     {
       code: `try { 
@@ -26,7 +26,7 @@ ruleTester.run("no-empty-catch", noEmptyCatchRule, {
       } catch (e) {
       
       }`,
-      errors: [{ messageId: "emptyCatch" }],
+      errors: [{ messageId: 'emptyCatch' }],
     },
   ],
 });

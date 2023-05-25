@@ -1,15 +1,15 @@
 module.exports = {
   meta: {
     messages: {
-      noUnnecessaryBacktick: "Unnecessary backtick, prefer single or double quotes",
-      unexpectedQuasisLength: "We have no expressions but quasis length is not 1. How is this even possible?",
+      noUnnecessaryBacktick: 'Unnecessary backtick, prefer single or double quotes',
+      unexpectedQuasisLength: 'We have no expressions but quasis length is not 1. How is this even possible?',
     },
   },
   create(context) {
     return {
       TemplateLiteral(node) {
         // if the parent node is a TaggedTemplateExpression, then we're good
-        if (node.parent.type === "TaggedTemplateExpression") {
+        if (node.parent.type === 'TaggedTemplateExpression') {
           return;
         }
 
@@ -19,17 +19,17 @@ module.exports = {
         }
 
         if (node.quasis.length !== 1) {
-          context.report({ node, messageId: "unexpectedQuasisLength" });
+          context.report({ node, messageId: 'unexpectedQuasisLength' });
           return;
         }
 
         const quasi = node.quasis[0];
-        if (quasi.value.raw.includes("\n")) {
+        if (quasi.value.raw.includes('\n')) {
           // there's a newline, so it makes sense to use a backtick
           return;
         }
 
-        context.report({ node, messageId: "noUnnecessaryBacktick" });
+        context.report({ node, messageId: 'noUnnecessaryBacktick' });
       },
     };
   },
