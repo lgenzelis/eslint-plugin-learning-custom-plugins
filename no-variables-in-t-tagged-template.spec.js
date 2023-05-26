@@ -1,9 +1,9 @@
 const { RuleTester } = require('eslint');
-const noUnnecessaryTFunctionCall = require('./no-unnecessary-t-function-call');
+const noVariablesInTTaggedTemplate = require('./no-variables-in-t-tagged-template');
 
 const ruleTester = new RuleTester({ parserOptions: { ecmaVersion: 'latest' } });
 
-ruleTester.run('no-unnecessary-t-function-call', noUnnecessaryTFunctionCall, {
+ruleTester.run('no-variables-in-t-tagged-template', noVariablesInTTaggedTemplate, {
   valid: [
     {
       code: 'console.log("lalala")',
@@ -12,20 +12,23 @@ ruleTester.run('no-unnecessary-t-function-call', noUnnecessaryTFunctionCall, {
       code: 'console.log(t`lalala`)',
     },
     {
-      code: 't("lalala", "lolo")',
+      code: 't("hello {{name}}", { name: "John" })',
     },
     {
       code: 't(foo)',
     },
+    {
+      code: 'foo`hello ${name}`',
+    },
   ],
   invalid: [
     {
-      code: 'console.log(t("lalala"))',
-      errors: [{ messageId: 'unnecessaryTFunctionCall' }],
+      code: 't`hello ${name}`',
+      errors: [{ messageId: 'noVariablesInTTaggedTemplate' }],
     },
     {
-      code: 'console.log(t`lalala ${`and`} lololo`)',
-      errors: [{ messageId: 'unnecessaryTFunctionCall' }],
+      code: 't`hello ${name1} and ${name2}`',
+      errors: [{ messageId: 'noVariablesInTTaggedTemplate' }],
     },
   ],
 });

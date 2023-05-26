@@ -1,19 +1,20 @@
 module.exports = {
   meta: {
     messages: {
-      unnecessaryTFunctionCall: 'Use a tagged template instead',
+      noVariablesInTTaggedTemplate:
+        'Use a regular function call instead, and pass the variables as an object argument.\nExample: t`Hello ${name}` -> t("Hello {{name}}", { name })',
     },
   },
   create(context) {
     return {
-      CallExpression(node) {
-        const functionName = node.callee.name;
+      TaggedTemplateExpression(node) {
+        const functionName = node.tag.name;
         if (functionName !== 't') {
           return;
         }
 
-        if (node.arguments.length === 1 && node.arguments[0].type === 'Literal') {
-          context.report({ node: node.arguments[0], messageId: 'unnecessaryTFunctionCall' });
+        if (node.quasi.expressions.length > 0) {
+          context.report({ node: node.quasi, messageId: 'noVariablesInTTaggedTemplate' });
         }
       },
     };
