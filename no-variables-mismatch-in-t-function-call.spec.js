@@ -20,11 +20,18 @@ ruleTester.run('no-variables-in-t-tagged-template', noVariablesMismatchInTFuncti
     {
       code: 't(foo)',
     },
+    {
+      code: 't(foo, { name: "John" })',
+    },
   ],
   invalid: [
     {
       code: 't()',
       errors: [{ messageId: 'noEmptyCall' }],
+    },
+    {
+      code: 't("lalala")',
+      errors: [{ messageId: 'unnecessaryTFunctionCall' }],
     },
     {
       code: 't(`lalala`)',
