@@ -27,7 +27,7 @@ ruleTester.run('no-variables-in-t-tagged-template', noVariablesMismatchInTFuncti
   invalid: [
     {
       code: 't()',
-      errors: [{ messageId: 'noEmptyCall' }],
+      errors: [{ messageId: 'emptyTFunctionCall' }],
     },
     {
       code: 't("lalala")',
@@ -43,7 +43,7 @@ ruleTester.run('no-variables-in-t-tagged-template', noVariablesMismatchInTFuncti
     },
     {
       code: 't(`hello {{name}}`, { name: "John" })',
-      errors: [{ messageId: 'noTemplateLiteralAsFirstArg' }],
+      errors: [{ messageId: 'templateLiteralAsFirstArg' }],
     },
     {
       code: 't("hello {{name}} {{lastName}}", { name: "John" })',

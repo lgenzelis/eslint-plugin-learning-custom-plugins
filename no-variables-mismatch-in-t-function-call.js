@@ -3,9 +3,9 @@ const reg = /\{\{\w*\}\}/g;
 module.exports = {
   meta: {
     messages: {
-      noEmptyCall: 'You need to pass at least one argument to the t function',
+      emptyTFunctionCall: 'You need to pass at least one argument to the t function',
       unnecessaryTFunctionCall: 'Use a tagged template instead',
-      noTemplateLiteralAsFirstArg: 'First argument should be a regular string',
+      templateLiteralAsFirstArg: 'First argument should be a regular string',
       noObjectLiteralAsSecondArgument:
         'The second argument of the t function should be an object literal, otherwise we cannot check for missing keys.',
       numberOfKeysMismatch:
@@ -22,7 +22,7 @@ module.exports = {
         }
 
         if (node.arguments.length < 1) {
-          context.report({ node, messageId: 'noEmptyCall' });
+          context.report({ node, messageId: 'emptyTFunctionCall' });
           return;
         }
 
@@ -35,14 +35,14 @@ module.exports = {
 
         const text = node.arguments[0];
         if (text.type === 'TemplateLiteral') {
-          context.report({ node, messageId: 'noTemplateLiteralAsFirstArg' });
+          context.report({ node: text, messageId: 'templateLiteralAsFirstArg' });
           return;
         }
 
         const values = node.arguments[1];
 
         if (values.type !== 'ObjectExpression') {
-          context.report({ node, messageId: 'noObjectLiteralAsSecondArgument' });
+          context.report({ node: values, messageId: 'noObjectLiteralAsSecondArgument' });
           return;
         }
 
@@ -52,8 +52,8 @@ module.exports = {
         }
 
         const matches = text.value.match(reg);
-        if (matches.length !== values.properties.length) {
-          context.report({ node, messageId: 'numberOfKeysMismatch' });
+        if (!matches || matches.length !== values.properties.length) {
+          context.report({ node: values, messageId: 'numberOfKeysMismatch' });
           return;
         }
 
@@ -61,7 +61,7 @@ module.exports = {
           const matchKey = match.slice(2, -2);
           const matchHasCorrespondingKey = values.properties.some((property) => property.key.name === matchKey);
           if (!matchHasCorrespondingKey) {
-            context.report({ node, messageId: 'keyMismatch', data: { key: matchKey } });
+            context.report({ node: values, messageId: 'keyMismatch', data: { key: matchKey } });
           }
         }
       },
