@@ -1,9 +1,11 @@
 module.exports = {
   meta: {
+    type: 'problem',
     messages: {
       emptyCatch: 'Empty catch block is not allowed.',
       noBlockStatement: 'WHAT? No block statement? Are you kidding me?',
     },
+    schema: [],
   },
   create(context) {
     const sourceCode = context.sourceCode;

@@ -1,9 +1,11 @@
 module.exports = {
   meta: {
+    type: 'problem',
     messages: {
       untranslatedTextChild: 'Text children should be internationalized',
       untranslatedAriaLabel: 'aria-labels should be internationalized',
     },
+    schema: [],
   },
   create(context) {
     return {

@@ -34,10 +34,10 @@ ruleTester.run('no-untranslated-text', noUntranslatedText, {
       }`,
     },
     {
-      code: `<TestComponent>{t\`lalala\`}</TestComponent>;`,
+      code: '<TestComponent>{t`lalala`}</TestComponent>;',
     },
     {
-      code: `<TestComponent>42</TestComponent>;`,
+      code: '<TestComponent>42</TestComponent>;',
     },
     {
       code: '<TestComponent aria-label={t`some aria label`}>{t`lalala`}</TestComponent>;',
@@ -65,7 +65,7 @@ ruleTester.run('no-untranslated-text', noUntranslatedText, {
       errors: [{ messageId: 'untranslatedAriaLabel' }, { messageId: 'untranslatedTextChild' }],
     },
     {
-      code: `<TestComponent>lalala</TestComponent>;`,
+      code: '<TestComponent>lalala</TestComponent>;',
       errors: [{ messageId: 'untranslatedTextChild' }],
     },
     {

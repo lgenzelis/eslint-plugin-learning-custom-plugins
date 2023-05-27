@@ -1,9 +1,11 @@
 module.exports = {
   meta: {
+    type: 'problem',
     messages: {
       noUnnecessaryBacktick: 'Unnecessary backtick, prefer single or double quotes',
       unexpectedQuasisLength: 'We have no expressions but quasis length is not 1. How is this even possible?',
     },
+    schema: [],
   },
   create(context) {
     return {

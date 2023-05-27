@@ -2,6 +2,7 @@ const reg = /\{\{\w*\}\}/g;
 
 module.exports = {
   meta: {
+    type: 'problem',
     messages: {
       emptyTFunctionCall: 'You need to pass at least one argument to the t function',
       unnecessaryTFunctionCall: 'Use a tagged template instead',
@@ -12,6 +13,7 @@ module.exports = {
         'The number of keys in the object literal does not match the number of variables in the string',
       keyMismatch: 'The key "{{key}}" is missing in the object literal',
     },
+    schema: [],
   },
   create(context) {
     return {
