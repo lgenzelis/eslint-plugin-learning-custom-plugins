@@ -6,4 +6,14 @@ module.exports = {
     'no-variables-in-t-tagged-template': require('./no-variables-in-t-tagged-template.js'),
     'no-variables-mismatch-in-t-function-call': require('./no-variables-mismatch-in-t-function-call.js'),
   },
+  configs: {
+    recommended: {
+      plugins: ['@lgenzelis/learning-custom-plugins'],
+      rules: {
+        '@lgenzelis/learning-custom-plugins/no-untranslated-text': 'error',
+        '@lgenzelis/learning-custom-plugins/no-variables-in-t-tagged-template': 'error',
+        '@lgenzelis/learning-custom-plugins/no-variables-mismatch-in-t-function-call': 'error',
+      },
+    },
+  },
 };
